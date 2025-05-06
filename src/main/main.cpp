@@ -345,32 +345,42 @@ std::vector<recomp::GameEntry> supported_games = {
         .rom_hash = 0xD992BD1EBD3F8756ULL,
         .internal_name = "Kirby64            ",
         .game_id = u8"NK4E.us",
+        .mod_game_id = "kirby64",
+        .save_type = recomp::SaveType::Eep16k,
         .is_enabled = true,
         .entrypoint_address = get_entrypoint_address(),
         .entrypoint = recomp_entrypoint,
-        .save_type = recomp::SaveType::Eep16k,
     },
 };
 
 // TODO: move somewhere else
 namespace zelda64 {
+    bool gobj(int id) {
+        return 10000000 < id < 20000000;
+    }
+
     std::string get_game_thread_name(const OSThread* t) {
         std::string name = "[Game] ";
         // name += std::to_string(t->id);
-        switch (t->id) {
+        if (zelda64::gobj(t->id)) {
+            name = "[GObjProc] ";
+            name += std::to_string(t->id - 10000000);
+        }
+        else {
+            switch (t->id) {
             case 0:
                 switch (t->priority) {
-                    case 150:
-                        name += "PIMGR";
-                        break;
+                case 150:
+                    name += "PIMGR";
+                    break;
 
-                    case 254:
-                        name += "VIMGR";
-                        break;
+                case 254:
+                    name += "VIMGR";
+                    break;
 
-                    default:
-                        name += std::to_string(t->id);
-                        break;
+                default:
+                    name += std::to_string(t->id);
+                    break;
                 }
                 break;
             case 1:
@@ -391,18 +401,14 @@ namespace zelda64 {
             case 8:
                 name += "FAULT";
                 break;
-            case 10000000 ... 20000000:
-                name = "[GObjProc] ";
-                name += std::to_string(t->id - 10000000);
-                break;
             case 100000000:
                 name += "WEIRD";
                 break;
             default:
                 name += std::to_string(t->id);
                 break;
+            }
         }
-
         return name;
     }
 }
