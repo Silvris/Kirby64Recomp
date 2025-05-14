@@ -8,7 +8,7 @@ extern void func_80112A40(s32, Vector*, Vector*);
 extern s32 change_kirby_hp(f32);
 extern u8 ovl1_TamperCheck(void);
 
-#define SPEEDCHANGE (1.0f)
+#define SPEEDCHANGE (2.0f)
 
 s32 get_stickX() {
     return gControllers[0].stick_x;
@@ -20,6 +20,8 @@ f32 get_speed_change() {
     return SPEEDCHANGE * ((f32)ABSVAL(x) / 80.0f);
 }
 
+// This function is not matched in Decomp,
+//  but is not functionally equivalent either.
 // RECOMP_PATCH void func_800B531C(s32 arg0) {
 //     Vector sp64;
 //     f32 sp58;
@@ -154,6 +156,5 @@ f32 get_speed_change() {
 //         gKirbyState.unk160 = 0;
 //         gKirbyState.unk164 = gKirbyState.unk168;
 //     }
-//     change_kirby_hp(6.0f);
 // }
 
