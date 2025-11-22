@@ -361,12 +361,6 @@ namespace zelda64 {
 
     std::string get_game_thread_name(const OSThread* t) {
         std::string name = "[Game] ";
-        // name += std::to_string(t->id);
-        if (zelda64::gobj(t->id)) {
-            name = "[GObjProc] ";
-            name += std::to_string(t->id - 10000000);
-        }
-        else {
             switch (t->id) {
             case 0:
                 switch (t->priority) {
@@ -401,6 +395,10 @@ namespace zelda64 {
             case 8:
                 name += "FAULT";
                 break;
+            case 10000000 ... 20000000:
+                name = "[GObjProc] ";
+                name += std::to_string(t->id - 10000000);
+                break;
             case 100000000:
                 name += "WEIRD";
                 break;
@@ -408,7 +406,6 @@ namespace zelda64 {
                 name += std::to_string(t->id);
                 break;
             }
-        }
         return name;
     }
 }
