@@ -26,8 +26,8 @@
 #define osContStartQuery osContStartQuery_recomp
 #define osContGetQuery osContGetQuery_recomp
 
-#define sinf __sinf_recomp
-#define cosf __cosf_recomp
+#define sinf sinf_recomp
+#define cosf cosf_recomp
 #define bzero bzero_recomp
 #define gRandFloat sRandFloat
 // #include "global.h"

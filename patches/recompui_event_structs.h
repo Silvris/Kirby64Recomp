@@ -1,6 +1,6 @@
 #ifndef __UI_FUNCS_H__
 #define __UI_FUNCS_H__
-
+#define bool int
 // These two enums must be kept in sync with src/ui/elements/ui_types.h!
 typedef enum {
     UI_EVENT_NONE,

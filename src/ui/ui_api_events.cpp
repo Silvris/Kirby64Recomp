@@ -39,7 +39,7 @@ void recompui::queue_ui_callback(recompui::ResourceId resource, const Event& e, 
 
 bool convert_event(const recompui::Event& in, RecompuiEventData& out) {
     bool skip = false;
-    out = {};
+    out = RecompuiEventData();
     out.type = static_cast<RecompuiEventType>(in.type);
 
     switch (in.type) {

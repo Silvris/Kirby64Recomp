@@ -59,7 +59,6 @@ vcpkg_installed/
 # Runtime files
 imgui.ini
 rt64.log
-*.txt
 node_modules/
 
 # Recompiler Linux binary
