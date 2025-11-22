@@ -355,57 +355,53 @@ std::vector<recomp::GameEntry> supported_games = {
 
 // TODO: move somewhere else
 namespace zelda64 {
-    bool gobj(int id) {
-        return 10000000 < id < 20000000;
-    }
-
     std::string get_game_thread_name(const OSThread* t) {
         std::string name = "[Game] ";
-            switch (t->id) {
-            case 0:
-                switch (t->priority) {
-                case 150:
-                    name += "PIMGR";
-                    break;
+        switch (t->id) {
+        case 0:
+            switch (t->priority) {
+            case 150:
+                name += "PIMGR";
+                break;
 
-                case 254:
-                    name += "VIMGR";
-                    break;
+            case 254:
+                name += "VIMGR";
+                break;
 
-                default:
-                    name += std::to_string(t->id);
-                    break;
-                }
-                break;
-            case 1:
-                name += "IDLE";
-                break;
-            case 3:
-                name += "SCHED";
-                break;
-            case 4:
-                name += "AUD";
-                break;
-            case 5:
-                name += "GAME";
-                break;
-            case 6:
-                name += "CONT";
-                break;
-            case 8:
-                name += "FAULT";
-                break;
-            case 10000000 ... 20000000:
-                name = "[GObjProc] ";
-                name += std::to_string(t->id - 10000000);
-                break;
-            case 100000000:
-                name += "WEIRD";
-                break;
             default:
                 name += std::to_string(t->id);
                 break;
             }
+            break;
+        case 1:
+            name += "IDLE";
+            break;
+        case 3:
+            name += "SCHED";
+            break;
+        case 4:
+            name += "AUD";
+            break;
+        case 5:
+            name += "GAME";
+            break;
+        case 6:
+            name += "CONT";
+            break;
+        case 8:
+            name += "FAULT";
+            break;
+        case 10000000 ... 20000000:
+            name = "[GObjProc] ";
+            name += std::to_string(t->id - 10000000);
+            break;
+        case 100000000:
+            name += "WEIRD";
+            break;
+        default:
+            name += std::to_string(t->id);
+            break;
+        }
         return name;
     }
 }
